@@ -60,6 +60,14 @@ object Dependency {
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.AndroidTest.espressoVersion}"
     }
 
+    object SkeletonLayout {
+        const val core = "com.ericktijerou.koleton:koleton:${Versions.SkeletonLayout.core}"
+    }
+
+    object Shimmer {
+        const val core = "com.facebook.shimmer:shimmer:${Versions.Shimmer.core}"
+    }
+
     val appLibraries = arrayListOf<String>().apply {
         // Core Region
         add(Core.coreKtx)

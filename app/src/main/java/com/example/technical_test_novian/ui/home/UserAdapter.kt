@@ -27,15 +27,12 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.UserListViewHolder>() {
 
     inner class UserListViewHolder(private val binding: UserItemListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: User) {
-
             with(binding) {
 
                 tvUserId.text = item.uid
                 tvUserName.text = item.uName
-
+                tvUserRoles.text = item.role
             }
-
-
         }
     }
 

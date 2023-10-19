@@ -36,4 +36,12 @@ object Versions {
         const val core = "1.3.9"
     }
 
+    object SkeletonLayout {
+        const val core = "1.0.0-beta01"
+    }
+
+    object Shimmer {
+        const val core = "0.5.0"
+    }
+
 }

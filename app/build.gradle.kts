@@ -57,4 +57,6 @@ dependencies {
     testImplement(Dependency.testLibraries)
     kaptImplement(Dependency.kaptLibraries)
 
+    implementation(Dependency.SkeletonLayout.core)
+    implementation(Dependency.Shimmer.core)
 }

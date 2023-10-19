@@ -7,12 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.technical_test_novian.R
 import com.example.technical_test_novian.common.base.BaseFragment
 import com.example.technical_test_novian.databinding.FragmentHomeBinding
 import com.example.technical_test_novian.domain.model.User
 import com.example.technical_test_novian.utils.DataState
+import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -20,6 +25,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         get() = FragmentHomeBinding::inflate
 
     private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var userAdapter: UserAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun setup() {
         initView()
@@ -33,26 +41,37 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initRecyclerView() {
-
+        recyclerView = binding.rvListUser
+        userAdapter = UserAdapter()
+        recyclerView.apply {
+            adapter = userAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     private fun render(state: DataState<List<User>>) {
         when(state) {
 
             is DataState.Loading -> {
-                Log.i("HOME", "DATA IS LOAD")
+                recyclerView.loadSkeleton(R.layout.user_item_list) {
+                    val customShimmer = Shimmer.AlphaHighlightBuilder()
+                        .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+                        .build()
+
+                    shimmer(customShimmer)
+                }
             }
 
             is DataState.Failure -> {
-                Log.i("HOME", "size is ${state.message}")
+                recyclerView.hideSkeleton()
             }
 
             is DataState.Success -> {
-                Log.i("HOME", "size is ${state.data.size}")
+                recyclerView.hideSkeleton()
+                userAdapter.submitList(state.data)
             }
 
         }
     }
-
 
 }

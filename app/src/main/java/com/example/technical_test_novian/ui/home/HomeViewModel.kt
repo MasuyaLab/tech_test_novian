@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -36,6 +37,18 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _dataState.postValue(DataState.Loading)
             userRepository.getListUser()
+                .zip(userRepository.getListRoles()) { users, roles ->
+                    val map = mutableMapOf<Int, String>()
+                    roles.map {
+                        map.put(it.kdRole, it.nmRole)
+                    }
+
+                    return@zip users.map {
+                        it.copy(
+                            role = map[it.kdRole] ?: "Unknown Role"
+                        )
+                    }
+                }
                 .flowOn(io)
                 .catch {
                     _dataState.postValue(DataState.Failure(it.message ?: "Error Occurred!"))
