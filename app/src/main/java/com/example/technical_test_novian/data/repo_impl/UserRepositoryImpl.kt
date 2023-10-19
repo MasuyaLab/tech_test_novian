@@ -22,7 +22,7 @@ class UserRepositoryImpl(
     private val apiService: ApiService,
     private val gson: Gson
 ): UserRepository {
-    override suspend fun registerNewUser(uid: String, uName: String, uPw: String, role: Int): Flow<String> {
+    override suspend fun registerNewUser(uid: String, uName: String, uPw: String, role: String): Flow<String> {
         return flow {
             val response = apiService.postNewUser(uid, uName, uPw, role).string()
             val jsonResponse = gson.fromJson(response, AddUserResponse::class.java)

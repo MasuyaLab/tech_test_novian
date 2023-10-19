@@ -20,7 +20,7 @@ interface ApiService {
         @Field("UID") uid: String,
         @Field("UName") uName: String,
         @Field("UPW") uPw: String,
-        @Field("KdRole") role: Int
+        @Field("KdRole") role: String
     ): ResponseBody
 
     @GET(Constants.GET_LIST_USER_URL)

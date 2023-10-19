@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.technical_test_novian.R
 import com.example.technical_test_novian.common.base.BaseFragment
 import com.example.technical_test_novian.databinding.FragmentHomeBinding
 import com.example.technical_test_novian.domain.model.User
+import com.example.technical_test_novian.ui.add_user.AddUserFragment
 import com.example.technical_test_novian.utils.DataState
 import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,8 +33,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var userAdapter: UserAdapter
     private lateinit var recyclerView: RecyclerView
 
+    private lateinit var fragmentManager: FragmentManager
+
     override fun setup() {
+        fragmentManager = requireActivity().supportFragmentManager
         initView()
+        addUserNavigation()
     }
 
     private fun initView() {
@@ -63,6 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             is DataState.Failure -> {
+                // Handle Later
                 recyclerView.hideSkeleton()
             }
 
@@ -71,6 +80,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 userAdapter.submitList(state.data)
             }
 
+        }
+    }
+
+    private fun addUserNavigation() {
+        val addUserFragment = AddUserFragment()
+        binding.addUser.setOnClickListener {
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, addUserFragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 
