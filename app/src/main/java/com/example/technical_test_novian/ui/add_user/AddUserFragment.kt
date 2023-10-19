@@ -1,20 +1,15 @@
 package com.example.technical_test_novian.ui.add_user
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.technical_test_novian.R
 import com.example.technical_test_novian.common.base.BaseFragment
 import com.example.technical_test_novian.databinding.FragmentAddUserBinding
 import dagger.hilt.android.AndroidEntryPoint
-import koleton.api.loadSkeleton
 
 @AndroidEntryPoint
 class AddUserFragment : BaseFragment<FragmentAddUserBinding>() {
@@ -34,9 +29,7 @@ class AddUserFragment : BaseFragment<FragmentAddUserBinding>() {
     }
 
     private fun register() {
-
         with(binding) {
-
             btnSave.setOnClickListener {
                 val uid = binding.etAddId.text.toString()
                 val uName = binding.etAddName.text.toString()
@@ -60,6 +53,7 @@ class AddUserFragment : BaseFragment<FragmentAddUserBinding>() {
         )
 
         spinner.setAdapter(adapter)
+        spinner.setText("Purchasing", false)
     }
 
     private fun observeError() {

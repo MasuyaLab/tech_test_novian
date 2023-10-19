@@ -5,14 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.technical_test_novian.domain.repository.UserRepository
+import com.example.technical_test_novian.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -38,13 +35,13 @@ class AddUserViewModel @Inject constructor(
         password: String,
         role: String
     ) {
-        val roleCode = getKeyByValue(roleMap, role)
+        val roleCode = Utils.getKeyByValue(roleMap, role)
         viewModelScope.launch(io) {
             userRepository.registerNewUser(
                 uid = uid,
                 uName = uName,
                 uPw = password,
-                "0$roleCode"
+                role = "0$roleCode"
             )
                 .catch { _addUserStatus.postValue(it.message) }
                 .collect{ _addUserStatus.postValue(it) }
@@ -61,15 +58,6 @@ class AddUserViewModel @Inject constructor(
                     }
                 }
         }
-    }
-
-    private fun getKeyByValue(map: Map<Int, String>, value: String): Int {
-        for ((key, mapValue) in map) {
-            if (mapValue == value) {
-                return key
-            }
-        }
-        return 7
     }
 
 }
