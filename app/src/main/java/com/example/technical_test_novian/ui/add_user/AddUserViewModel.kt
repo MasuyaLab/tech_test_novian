@@ -44,7 +44,7 @@ class AddUserViewModel @Inject constructor(
                 uid = uid,
                 uName = uName,
                 uPw = password,
-                roleCode.toString()
+                "0$roleCode"
             )
                 .catch { _addUserStatus.postValue(it.message) }
                 .collect{ _addUserStatus.postValue(it) }
