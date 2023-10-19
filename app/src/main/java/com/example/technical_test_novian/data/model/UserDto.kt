@@ -1,8 +1,14 @@
 package com.example.technical_test_novian.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class UserDto(
-    val UID: String,
+    @SerializedName("UID")
+    val uid: String,
+    @SerializedName("UName")
     val uName: String,
-    val UPW: String,
-    val kdRole: Int
+    @SerializedName("UPW")
+    val uPw: String,
+    @SerializedName("KdRole")
+    val kdRole: String
 )
