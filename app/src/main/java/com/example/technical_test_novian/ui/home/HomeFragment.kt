@@ -53,8 +53,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.fetchUserList()
+    }
+
     private fun render(state: DataState<List<User>>) {
-        when(state) {
+        when (state) {
 
             is DataState.Loading -> {
                 recyclerView.loadSkeleton(R.layout.user_item_list) {

@@ -26,11 +26,7 @@ class HomeViewModel @Inject constructor(
     private val _dataState: MutableLiveData<DataState<List<User>>> = MutableLiveData()
     val dataState: LiveData<DataState<List<User>>> = _dataState
 
-    init {
-        fetchUserList()
-    }
-
-    private fun fetchUserList() {
+    fun fetchUserList() {
         viewModelScope.launch(Dispatchers.IO) {
             _dataState.postValue(DataState.Loading)
             userRepository.getListUser()
