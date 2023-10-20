@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.technical_test_novian.databinding.UserItemListBinding
 import com.example.technical_test_novian.domain.model.User
 
-class UserAdapter: RecyclerView.Adapter<UserAdapter.UserListViewHolder>() {
+class UserAdapter(
+    private val itemOnClick: (String) -> Unit
+) : RecyclerView.Adapter<UserAdapter.UserListViewHolder>() {
 
     private val diffCallBack = object : DiffUtil.ItemCallback<User>() {
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
@@ -32,6 +34,10 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.UserListViewHolder>() {
                 tvUserId.text = item.uid
                 tvUserName.text = item.uName
                 tvUserRoles.text = item.role
+
+                llUserItemList.setOnClickListener {
+                    itemOnClick(item.uid)
+                }
             }
         }
     }

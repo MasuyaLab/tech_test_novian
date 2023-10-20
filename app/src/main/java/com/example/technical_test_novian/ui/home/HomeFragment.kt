@@ -1,15 +1,10 @@
 package com.example.technical_test_novian.ui.home
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.technical_test_novian.R
@@ -17,6 +12,7 @@ import com.example.technical_test_novian.common.base.BaseFragment
 import com.example.technical_test_novian.databinding.FragmentHomeBinding
 import com.example.technical_test_novian.domain.model.User
 import com.example.technical_test_novian.ui.add_user.AddUserFragment
+import com.example.technical_test_novian.ui.details.DetailsFragment
 import com.example.technical_test_novian.utils.DataState
 import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initRecyclerView() {
         recyclerView = binding.rvListUser
-        userAdapter = UserAdapter()
+        userAdapter = UserAdapter(::detailsUserNavigation)
         recyclerView.apply {
             adapter = userAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -91,6 +87,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    private fun detailsUserNavigation(uid: String) {
+        val detailsUserFragment = DetailsFragment()
+        val bundle = Bundle()
+        bundle.putString("userId", uid)
+        detailsUserFragment.arguments = bundle
+
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, detailsUserFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

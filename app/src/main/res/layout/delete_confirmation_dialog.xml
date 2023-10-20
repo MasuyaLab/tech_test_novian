@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="DELETE USER"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Are you sure to delete this user?"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/yesOption"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#5279B5"
+                android:text="Yes" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/noOption"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:insetLeft="4dp"
+                android:insetTop="4dp"
+                android:insetRight="4dp"
+                android:insetBottom="4dp"
+                android:text="No"
+                android:textColor="#5279B5"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="4dp"
+                app:rippleColor="@android:color/transparent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
