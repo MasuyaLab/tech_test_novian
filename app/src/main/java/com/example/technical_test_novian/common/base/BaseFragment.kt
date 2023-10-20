@@ -1,4 +1,4 @@
-package com.example.technical_test_novian.base
+package com.example.technical_test_novian.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ abstract class BaseFragment<VB: ViewBinding>: Fragment() {
 
     private var _binding: VB? = null
 
-    val binding: VB get() = _binding!!
+    protected val binding: VB get() = _binding as VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
