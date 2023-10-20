@@ -23,7 +23,7 @@ class AddUserViewModel @Inject constructor(
     private val _addUserStatus: MutableLiveData<String> = MutableLiveData()
     val addUserStatus: LiveData<String> get() = _addUserStatus
 
-    private val roleMap = mutableMapOf<Int, String>()
+    private val roleMap = mutableMapOf<String, String>()
 
     init {
         getListRoles()

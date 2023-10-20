@@ -5,7 +5,7 @@ import com.example.technical_test_novian.domain.model.Roles
 
 fun RolesDto.toDomain(): Roles {
     return Roles(
-        kdRole = this.kdRoles.toInt(),
+        kdRole = this.kdRoles,
         nmRole = this.nmRole
     )
 }

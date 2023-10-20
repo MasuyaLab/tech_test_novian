@@ -15,7 +15,7 @@ interface UserRepository {
         uid: String,
         uName: String,
         uPw: String,
-        role: Int
+        role: String
     ): Flow<String>
 
     suspend fun deleteUser(uid: String): Flow<String>

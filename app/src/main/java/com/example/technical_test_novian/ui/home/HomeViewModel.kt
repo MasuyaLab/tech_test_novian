@@ -1,6 +1,5 @@
 package com.example.technical_test_novian.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +10,6 @@ import com.example.technical_test_novian.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
@@ -38,7 +35,7 @@ class HomeViewModel @Inject constructor(
             _dataState.postValue(DataState.Loading)
             userRepository.getListUser()
                 .zip(userRepository.getListRoles()) { users, roles ->
-                    val map = mutableMapOf<Int, String>()
+                    val map = mutableMapOf<String, String>()
                     roles.map {
                         map.put(it.kdRole, it.nmRole)
                     }

@@ -7,7 +7,8 @@ fun UserDto.toDomain(): User {
     return User(
         uid = this.uid,
         uName = this.uName,
-        kdRole = this.kdRole.toInt(),
-        role = ""
+        kdRole = this.kdRole,
+        role = "",
+        uPw = uPw
     )
 }

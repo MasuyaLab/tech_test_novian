@@ -1,6 +1,5 @@
 package com.example.technical_test_novian.data.repo_impl
 
-import android.util.Log
 import com.example.technical_test_novian.data.dataSrc.ApiService
 import com.example.technical_test_novian.data.mapper.toDomain
 import com.example.technical_test_novian.data.model.AddUserResponse
@@ -12,11 +11,7 @@ import com.example.technical_test_novian.domain.model.User
 import com.example.technical_test_novian.domain.repository.UserRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
-import okhttp3.internal.wait
 
 class UserRepositoryImpl(
     private val apiService: ApiService,
@@ -47,7 +42,12 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun editUser(uid: String, uName: String, uPw: String, role: Int): Flow<String> {
+    override suspend fun editUser(
+        uid: String,
+        uName: String,
+        uPw: String,
+        role: String
+    ): Flow<String> {
         return flow {
             val response = apiService.editUser(uid, uName, uPw, role).string()
             val jsonResponse = gson.fromJson(response, EditAndDeleteResponse::class.java)
