@@ -36,7 +36,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         }
 
         observeData()
-
+        getBack()
         validateUserInput()
     }
 
@@ -113,6 +113,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
                 }
             )
             dialog.show(parentFragmentManager, "dialog_delete_user")
+        }
+    }
+
+    private fun getBack() {
+        binding.topAppBar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
